@@ -1,0 +1,31 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--badges);
+}
+
+.logoLink {
+  display: block;
+  padding: 24px 0;
+}
+
+.logo {
+  width: 104px;
+  height: 16px;
+}
+
+.navList {
+  display: flex;
+  gap: 32px;
+  font-family: var(--font-manrope-sans);
+  font-weight: 500;
+}
+
+.navItem {
+}
+
+.navLink {
+  display: inline-block;
+  padding: 24px 0;
+}
