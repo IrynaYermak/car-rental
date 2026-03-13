@@ -5,14 +5,14 @@ export const api = axios.create({
   baseURL: process.env.NEXT_SERVER_API_URL,
 });
 
-// interface GetCarsParams {
-//   page?: string;
-//   brand?: string;
-//   rentalPrice?: string;
-//   minMileage?: string;
-//   maxMileage?: string;
-//   limit?: string;
-// }
+interface GetCarsParams {
+  page?: string;
+  brand?: string;
+  rentalPrice?: string;
+  minMileage?: string;
+  maxMileage?: string;
+  limit?: string;
+}
 
 interface GetCarsResponse {
   cars: Car[];
@@ -21,9 +21,24 @@ interface GetCarsResponse {
   totalPages: number;
 }
 
-export const getCars = async () => {
-  const { data } = await api.get<GetCarsResponse>("/cars");
-  console.log("cars", data);
+export const getCars = async ({
+  page,
+  brand,
+  rentalPrice,
+  minMileage,
+  maxMileage,
+  limit,
+}: GetCarsParams) => {
+  const { data } = await api.get<GetCarsResponse>("/cars", {
+    params: {
+      page,
+      brand,
+      rentalPrice,
+      minMileage,
+      maxMileage,
+      limit,
+    },
+  });
   return data;
 };
 

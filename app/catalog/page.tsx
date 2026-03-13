@@ -17,9 +17,10 @@ export const metadata: Metadata = {
 export default async function CatalogPage() {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery({
+  await queryClient.prefetchInfiniteQuery({
     queryKey: ["cars"],
-    queryFn: () => getCars(),
+    queryFn: () => getCars({}),
+    initialPageParam: "1",
   });
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

@@ -1,6 +1,7 @@
 import { Car } from "@/types/Car";
 import Image from "next/image";
 import css from "./Card.module.css";
+import Link from "next/link";
 
 interface CardProps {
   //   key: string;
@@ -53,9 +54,10 @@ export default function Card({ car }: CardProps) {
           </div>
         </div>
       </div>
-      <div className="center">
-        <button className={css.btn}>Read more</button>
-      </div>
+
+      <Link href={`/catalog/${id}`} className={css.btn}>
+        Read more
+      </Link>
     </li>
   );
 }
