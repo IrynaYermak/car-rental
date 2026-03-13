@@ -33,7 +33,13 @@
   justify-content: space-between;
   font-weight: 500;
 }
-
+.brandInfo,
+.text {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 .accent {
   color: var(--button);
 }
@@ -54,10 +60,10 @@
 }
 
 .text {
-  display: -webkit-box;
+  /* display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
-  overflow: hidden;
+  overflow: hidden; */
   padding-right: 6px;
   border-right: 1px solid var(--gray-light);
 }

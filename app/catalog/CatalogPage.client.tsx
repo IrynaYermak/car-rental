@@ -50,7 +50,7 @@ export default function CatalogClienPage() {
       {error && <p className="center">Something went wrong</p>}
       {!isLoading && !error && !isCarsExist && <p>No cars on your request</p>}
       {isCarsExist && <CarsList cars={cars} />}
-      {isCarsExist && (
+      {hasNextPage && (
         <div className={`center ${css.loadMore}`}>
           <button
             className={css.btn}

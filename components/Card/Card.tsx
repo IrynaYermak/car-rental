@@ -37,7 +37,7 @@ export default function Card({ car }: CardProps) {
 
       <div className={css.info}>
         <div className={css.carInfo}>
-          <p>
+          <p className={css.brandInfo}>
             {brand} <span className={css.accent}>{model}</span>, {year}
           </p>
           <p>${rentalPrice}</p>
