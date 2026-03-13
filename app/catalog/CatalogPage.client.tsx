@@ -2,11 +2,20 @@
 
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { getCars } from "@/lib/api/api";
+import SearchBar from "@/components/SearchBar/SearchBar";
 import Loader from "@/components/Loader/Loader";
 import CarsList from "@/components/CarsList/CarsList";
 import css from "./CatalogPage.module.css";
+import { FormInfo } from "@/types/FormInfo";
+import { useState } from "react";
 
 export default function CatalogClienPage() {
+  const [filterData, setFilterData] = useState<FormInfo | null>(null);
+
+  const handleFilter = (data: FormInfo) => {
+    setFilterData(data);
+  };
+
   const {
     data,
     isLoading,
@@ -16,10 +25,11 @@ export default function CatalogClienPage() {
     isFetching,
     isFetchingNextPage,
   } = useInfiniteQuery({
-    queryKey: ["cars"],
+    queryKey: ["cars", filterData],
     queryFn: async ({ pageParam }) => {
       const data = await getCars({
         page: pageParam.toString(),
+        ...filterData,
       });
       return data;
     },
@@ -28,9 +38,6 @@ export default function CatalogClienPage() {
     getNextPageParam: (lastResponse) => {
       const currentPage = Number(lastResponse.page);
       const nextPage = currentPage + 1;
-      // console.log("Page", currentPage);
-      // console.log("Next page", nextPage);
-      // console.log("Total pages", lastResponse.totalPages);
       return nextPage <= lastResponse.totalPages ? nextPage : undefined;
     },
     select: (data) => {
@@ -39,13 +46,13 @@ export default function CatalogClienPage() {
     },
     refetchOnMount: false,
   });
-  console.log("data", data);
 
   const cars = data?.cars || [];
   const isCarsExist = cars.length > 0;
 
   return (
     <>
+      <SearchBar onSubmit={handleFilter} />
       {isLoading && <Loader />}
       {error && <p className="center">Something went wrong</p>}
       {!isLoading && !error && !isCarsExist && <p>No cars on your request</p>}

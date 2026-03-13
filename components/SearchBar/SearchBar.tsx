@@ -1,16 +1,26 @@
 "use client";
 
 import css from "./SearchBar.module.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useId } from "react";
 import { getBrands } from "@/lib/api/api";
+import { FormInfo } from "@/types/FormInfo";
 
-export default function SearchBar() {
+interface SearchBarProps {
+  onSubmit: (data: FormInfo) => void;
+}
+
+export default function SearchBar({ onSubmit }: SearchBarProps) {
+  const id = useId();
   const [brands, setBrands] = useState<string[]>([]);
   const price = ["30", "40", "50", "60", "70", "80"];
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    // const form = event.currentTarget;
+  const handleSubmit = (formData: FormData) => {
+    const brand = formData.get("brand-select")?.toString() || "";
+    const rentalPrice = formData.get("price-select")?.toString() || "";
+    const minMileage = formData.get("mileage-from")?.toString() || "";
+    const maxMileage = formData.get("mileage-to")?.toString() || "";
+
+    onSubmit({ brand, rentalPrice, minMileage, maxMileage });
   };
 
   useEffect(() => {
@@ -25,12 +35,16 @@ export default function SearchBar() {
 
     fetchBrands();
   }, []);
-  console.log("brands", brands);
+  // console.log("brands", brands);
 
   return (
-    <form className="center" onSubmit={handleSubmit}>
+    <form className="center" action={handleSubmit}>
       <label htmlFor="brand-select">Car brand</label>
-      <select id="brand-select" className={css.search}>
+      <select
+        name="brand-select"
+        id={`${id}-brand-select`}
+        className={css.search}
+      >
         <option value="">Choose a brand</option>
         {brands.map((brand) => (
           <option key={brand} value={brand}>
@@ -40,7 +54,11 @@ export default function SearchBar() {
       </select>
 
       <label htmlFor="price-select">Price/ 1 hour </label>
-      <select id="price-select" className={css.search}>
+      <select
+        name="price-select"
+        id={`${id}-price-select`}
+        className={css.search}
+      >
         <option value="">Choose a price</option>
         {price.map((el) => (
           <option key={el} value={el}>
@@ -52,7 +70,8 @@ export default function SearchBar() {
       <label htmlFor="mileage">
         Сar mileage / km
         <input
-          id="mileage-from"
+          name="mileage-from"
+          id={`${id}-mileage-from`}
           className={css.mill}
           type="number"
           placeholder="From"
@@ -61,7 +80,8 @@ export default function SearchBar() {
           pattern="[0-9]*"
         />
         <input
-          id="mileage-to"
+          name="mileage-to"
+          id={`${id}-mileage-to`}
           className={css.mill}
           type="number"
           placeholder="To"

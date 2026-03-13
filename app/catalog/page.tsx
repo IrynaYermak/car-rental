@@ -5,7 +5,7 @@ import {
   dehydrate,
 } from "@tanstack/react-query";
 import CatalogClienPage from "./CatalogPage.client";
-import SearchBar from "@/components/SearchBar/SearchBar";
+
 import { getCars } from "@/lib/api/api";
 import css from "./page.module.css";
 
@@ -25,7 +25,6 @@ export default async function CatalogPage() {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <section className={`container ${css.catalog}`}>
-        <SearchBar />
         <CatalogClienPage />
       </section>
     </HydrationBoundary>
