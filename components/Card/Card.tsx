@@ -1,0 +1,61 @@
+import { Car } from "@/types/Car";
+import Image from "next/image";
+import css from "./Card.module.css";
+
+interface CardProps {
+  //   key: string;
+  car: Car;
+}
+
+export default function Card({ car }: CardProps) {
+  const {
+    id,
+    img,
+    brand,
+    model,
+    year,
+    type,
+    rentalCompany,
+    address,
+    rentalPrice,
+    mileage,
+  } = car;
+  const city = address.split(",")[1];
+  const country = address.split(",")[2];
+
+  return (
+    <li key={id} className={css.card}>
+      <Image
+        className={css.photo}
+        src={img}
+        width={268}
+        height={276}
+        alt={brand}
+        loading="eager"
+      />
+
+      <div className={css.info}>
+        <div className={css.carInfo}>
+          <p>
+            {brand} <span className={css.accent}>{model}</span>, {year}
+          </p>
+          <p>${rentalPrice}</p>
+        </div>
+        <div className={css.group}>
+          <div className={css.location}>
+            <p className={css.text}>{city}</p>
+            <p className={css.text}>{country}</p>
+            <p className={css.text}>{rentalCompany}</p>
+          </div>
+          <div className={css.details}>
+            <p className={css.text}>{type}</p>
+            <p> {mileage} km</p>
+          </div>
+        </div>
+      </div>
+      <div className="center">
+        <button className={css.btn}>Read more</button>
+      </div>
+    </li>
+  );
+}

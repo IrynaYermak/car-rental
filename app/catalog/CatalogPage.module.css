@@ -1,0 +1,5 @@
+.btn {
+  border: 1px solid var(--button);
+  padding: 12px 51px;
+  background-color: transparent;
+}
