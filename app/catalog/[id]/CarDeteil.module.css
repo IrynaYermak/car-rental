@@ -1,0 +1,93 @@
+.carDeteil {
+  display: flex;
+  justify-content: space-between;
+  gap: 72px;
+  padding: 0;
+  padding-top: 84;
+  margin-bottom: 10em;
+}
+
+.orderSide {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.infoSide {
+  display: flex;
+  flex-direction: column;
+  padding-top: 28px;
+  gap: 68px;
+}
+
+.imgWrapper {
+  width: 100%;
+  min-width: 640px;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.block {
+}
+.deteils {
+  display: flex;
+  flex-direction: column;
+  gap: 110px;
+}
+.title {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.33;
+  margin-bottom: 8px;
+}
+
+.text {
+  font-weight: 500;
+  line-height: 1.25;
+}
+.idView {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.25;
+  color: var(--gray);
+  padding-left: 16px;
+}
+.mill {
+  padding-left: 16px;
+}
+.blockTitle {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+.icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.rentalPrice {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.33;
+  color: var(--button-hover);
+  padding-top: 16px;
+  margin-bottom: 32px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.listItem {
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
