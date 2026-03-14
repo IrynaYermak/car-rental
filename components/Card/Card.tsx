@@ -19,10 +19,10 @@ export default function Card({ car }: CardProps) {
     rentalCompany,
     address,
     rentalPrice,
-    mileage,
   } = car;
   const city = address.split(",")[1];
   const country = address.split(",")[2];
+  const mileage = car.mileage.toLocaleString("uk-UA");
 
   return (
     <li key={id} className={css.card}>

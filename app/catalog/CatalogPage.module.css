@@ -2,4 +2,9 @@
   border: 1px solid var(--button);
   padding: 12px 51px;
   background-color: transparent;
+  transition: ease-in-out 0.3s;
+}
+
+.btn:hover {
+  border-color: var(--button-hover);
 }
