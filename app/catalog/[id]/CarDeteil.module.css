@@ -4,7 +4,7 @@
   gap: 72px;
   padding: 0;
   padding-top: 84;
-  margin-bottom: 10em;
+  margin-bottom: 4em;
 }
 
 .orderSide {
@@ -15,7 +15,7 @@
 .infoSide {
   display: flex;
   flex-direction: column;
-  padding-top: 28px;
+  padding-top: 12px;
   gap: 68px;
 }
 
@@ -30,8 +30,7 @@
   width: 100%;
   height: auto;
 }
-.block {
-}
+
 .deteils {
   display: flex;
   flex-direction: column;
@@ -49,9 +48,7 @@
   line-height: 1.25;
 }
 .idView {
-  font-weight: 500;
   font-size: 16px;
-  line-height: 1.25;
   color: var(--gray);
   padding-left: 16px;
 }

@@ -4,6 +4,7 @@ import "modern-normalize";
 import "./globals.css";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
 import Header from "@/components/Header/Header";
+import { Toaster } from "react-hot-toast";
 
 const manropeSans = Manrope({
   variable: "--font-manrope-sans",
@@ -26,8 +27,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${interSans.variable} ${manropeSans.variable}`}>
+    <html lang="en" className={`${interSans.variable} ${manropeSans.variable}`}>
+      <body>
+        <Toaster />
         <TanStackProvider>
           <Header />
           <main> {children}</main>

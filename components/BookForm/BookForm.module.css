@@ -1,11 +1,14 @@
 .formBox {
   padding: 0 32px;
   padding-top: 32px;
+  border: 1px solid var(--gray-light);
+  border-radius: 10px;
 }
 .title {
   font-weight: 600;
   font-size: 20px;
   line-height: 1.2;
+  margin-bottom: 8px;
 }
 .text {
   font-weight: 500;
@@ -20,12 +23,28 @@
 }
 
 .input {
+  width: 100%;
   border-radius: 12px;
   padding: 12px 20px;
   background-color: var(--inputs);
   border: none;
   color: var(--gray);
   outline: none;
+  resize: none;
+}
+
+.input::placeholder {
+  color: var(--gray);
+}
+
+.input:focus {
+  background-color: var(--inputs);
+}
+
+.btnBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .btn {
@@ -33,6 +52,7 @@
   color: var(--white);
   padding: 12px 51px;
   transition: ease-in-out 0.3s;
+  margin-bottom: 32px;
 }
 .btn:hover {
   background-color: var(--button-hover);

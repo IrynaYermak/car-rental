@@ -1,8 +1,12 @@
+.headerBox {
+  background-color: var(--badges);
+  border-bottom: 1px solid var(--badges);
+}
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--badges);
 }
 
 .logoLink {
@@ -20,9 +24,6 @@
   gap: 32px;
   font-family: var(--font-manrope-sans);
   font-weight: 500;
-}
-
-.navItem {
 }
 
 .navLink {

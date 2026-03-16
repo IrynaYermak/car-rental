@@ -3,7 +3,7 @@ import css from "./Header.module.css";
 
 export default function Header() {
   return (
-    <header>
+    <header className={css.headerBox}>
       <div className={`container ${css.header}`}>
         <Link href="/" className={css.logoLink}>
           <svg className={css.logo}>

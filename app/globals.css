@@ -9,7 +9,7 @@
   --button-hover: #0b44cd;
   --mainFont: var(--font-manrope-sans), sans-serif;
   --secondFont: var(--font-inter-sans), sans-serif;
-  --background: var(--badges);
+  --background: var(--white);
 }
 
 html,
@@ -19,7 +19,6 @@ body {
 }
 
 body {
-  /* font-family: var(--mainFont); */
   color: var(--black);
   background: var(--background);
   margin: 0;

@@ -4,3 +4,10 @@ export interface FormInfo {
   minMileage: string;
   maxMileage: string;
 }
+
+export interface BookFormInfo {
+  email: string;
+  name: string;
+  date: string;
+  comment: string;
+}

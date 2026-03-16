@@ -20,9 +20,6 @@ export default function CarDeteil() {
     isError,
   } = useQuery<Car>({
     queryKey: ["car", id],
-    // queryFn: async () => {
-    //   const data = await getOneCar(id);
-    //   return data;
     queryFn: () => getOneCar(id),
 
     enabled: Boolean(id),
@@ -46,7 +43,6 @@ export default function CarDeteil() {
     functionalities,
     img,
     model,
-    // rentalCompany,
     rentalConditions,
     rentalPrice,
     year,
@@ -79,7 +75,8 @@ export default function CarDeteil() {
           <h2 className={css.title}>
             {`${brand} 
             ${model}`}
-            ,{year} <span className={css.idView}>Id:{idView}</span>
+            ,{year}{" "}
+            <span className={`${css.text} ${css.idView}`}>Id:{idView}</span>
           </h2>
           <p className={css.text}>
             <svg className={css.icon}>
