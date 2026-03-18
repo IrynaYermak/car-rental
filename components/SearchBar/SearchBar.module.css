@@ -1,25 +1,77 @@
 .form {
-  max-width: 924px;
+  max-width: 532px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
-  align-items: flex-end;
-  gap: 16px;
-  padding-top: 84px;
-  margin-bottom: 56px;
+  align-items: center;
+  gap: 12px;
+  padding-top: 42px;
+  margin-bottom: 28px;
+
+  @media screen and (min-width: 1440px) {
+    max-width: 924px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 16px;
+    padding-top: 84px;
+    margin-bottom: 56px;
+  }
 }
 
 .group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  align-items: center;
+  gap: 6px;
   font-size: 12px;
   line-height: 1.33;
   color: var(--gray);
+
+  @media screen and (min-width: 1440px) {
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+.mileageWrapper {
+  display: flex;
+  flex-direction: row;
+  max-width: 280px;
+
+  @media screen and (min-width: 1440px) {
+    max-width: 320px;
+  }
 }
 
+.mill {
+  background-color: var(--inputs);
+  border: none;
+  padding: 8px 16px;
+  max-width: 140px;
+  font-weight: 500;
+  font-size: 16px;
+  font-family: var(--font-manrope-sans);
+  line-height: 1.25;
+  color: var(--black);
+  outline: none;
+  @media screen and (min-width: 1440px) {
+    padding: 12px 24px;
+    max-width: 160px;
+  }
+}
+.millFrom {
+  border-right: 1px solid #dadde1;
+  border-radius: 12px 0 0 12px;
+}
+.millTo {
+  border-radius: 0 12px 12px 0;
+}
 .btn {
-  padding: 12px 51px;
+  padding: 6px 32px;
   background-color: var(--button);
   color: var(--white);
+  @media screen and (min-width: 1440px) {
+    padding: 12px 51px;
+  }
 }

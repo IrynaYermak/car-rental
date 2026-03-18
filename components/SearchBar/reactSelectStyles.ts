@@ -5,14 +5,15 @@ export const selectStyles = {
     backgroundColor: "var(--inputs)",
     border: "none",
     borderRadius: "12px",
-    padding: "12px 16px",
+    padding: "8px 12px",
     height: "44px",
-
     width: "204px",
     boxShadow: "none",
-
     fontSize: "16px",
     FontFace: "var(--font-manrope-sans)",
+    " @media screen and (min-width: 1440px)": {
+      padding: "12px 16px",
+    },
   }),
 
   placeholder: (base: any) => ({

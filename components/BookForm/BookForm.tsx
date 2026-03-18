@@ -17,7 +17,7 @@ export default function BookForm() {
 
   const handleform = (formData: FormData) => {
     try {
-      const bookInfo = Object.fromEntries(formData) as BookFormInfo;
+      const bookInfo = Object.fromEntries(formData) as unknown as BookFormInfo;
       if (!bookInfo.email || !bookInfo.name || !bookInfo.date) {
         toast.error("Please fill all required fields.");
         return;

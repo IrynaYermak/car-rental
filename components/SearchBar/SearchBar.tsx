@@ -4,8 +4,10 @@ import css from "./SearchBar.module.css";
 import { useState, useEffect, useId } from "react";
 import { getBrands } from "@/lib/api/api";
 import { FormInfo } from "@/types/FormInfo";
-import Select from "react-select";
+// import Select from "react-select";
 import { selectStyles } from "./reactSelectStyles";
+import dynamic from "next/dynamic";
+const Select = dynamic(() => import("react-select"), { ssr: false });
 
 interface SearchBarProps {
   onSubmit: (data: FormInfo) => void;
@@ -71,26 +73,28 @@ export default function SearchBar({ onSubmit }: SearchBarProps) {
         </label>
         <label htmlFor="mileage" className={css.group}>
           Сar mileage / km
-          <input
-            name="mileage-from"
-            id={`${id}-mileage-from`}
-            className={css.mill}
-            type="number"
-            placeholder="From"
-            min="0"
-            inputMode="numeric"
-            pattern="[0-9]*"
-          />
-          <input
-            name="mileage-to"
-            id={`${id}-mileage-to`}
-            className={css.mill}
-            type="number"
-            placeholder="To"
-            min="0"
-            inputMode="numeric"
-            pattern="[0-9]*"
-          />
+          <div className={css.mileageWrapper}>
+            <input
+              name="mileage-from"
+              id={`${id}-mileage-from`}
+              className={`${css.mill} ${css.millFrom}`}
+              type="number"
+              placeholder="From"
+              min="0"
+              inputMode="numeric"
+              pattern="[0-9]*"
+            />
+            <input
+              name="mileage-to"
+              id={`${id}-mileage-to`}
+              className={`${css.mill} ${css.millTo}`}
+              type="number"
+              placeholder="To"
+              min="0"
+              inputMode="numeric"
+              pattern="[0-9]*"
+            />
+          </div>
         </label>
         <button type="submit" className={css.btn}>
           Search

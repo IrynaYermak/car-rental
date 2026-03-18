@@ -95,7 +95,6 @@ li {
 }
 
 /* === React Select scrollbar === */
-/* === React Select scrollbar === */
 .react-select__menu-list::-webkit-scrollbar {
   width: 8px;
 }
@@ -106,7 +105,17 @@ li {
 }
 
 .react-select__menu-list::-webkit-scrollbar-thumb {
-  background: var(--gray-light); /* синій як у твоїх інпутів */
+  background: var(--gray-light);
   border-radius: 10px;
   height: 64px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
 }
