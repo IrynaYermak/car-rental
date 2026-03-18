@@ -4,6 +4,8 @@ import css from "./SearchBar.module.css";
 import { useState, useEffect, useId } from "react";
 import { getBrands } from "@/lib/api/api";
 import { FormInfo } from "@/types/FormInfo";
+import Select from "react-select";
+import { selectStyles } from "./reactSelectStyles";
 
 interface SearchBarProps {
   onSubmit: (data: FormInfo) => void;
@@ -35,64 +37,65 @@ export default function SearchBar({ onSubmit }: SearchBarProps) {
 
     fetchBrands();
   }, []);
+  const optionsBrand = brands.map((brand) => ({ value: brand, label: brand }));
+  const optionsPrice = price.map((el) => ({ value: el, label: el }));
+
   // console.log("brands", brands);
 
   return (
-    <form className="center" action={handleSubmit}>
-      <label htmlFor="brand-select">Car brand</label>
-      <select
-        name="brand-select"
-        id={`${id}-brand-select`}
-        className={css.search}
-      >
-        <option value="">Choose a brand</option>
-        {brands.map((brand) => (
-          <option key={brand} value={brand}>
-            {brand}
-          </option>
-        ))}
-      </select>
-
-      <label htmlFor="price-select">Price/ 1 hour </label>
-      <select
-        name="price-select"
-        id={`${id}-price-select`}
-        className={css.search}
-      >
-        <option value="">Choose a price</option>
-        {price.map((el) => (
-          <option key={el} value={el}>
-            {el}
-          </option>
-        ))}
-      </select>
-
-      <label htmlFor="mileage">
-        Сar mileage / km
-        <input
-          name="mileage-from"
-          id={`${id}-mileage-from`}
-          className={css.mill}
-          type="number"
-          placeholder="From"
-          min="0"
-          inputMode="numeric"
-          pattern="[0-9]*"
-        />
-        <input
-          name="mileage-to"
-          id={`${id}-mileage-to`}
-          className={css.mill}
-          type="number"
-          placeholder="To"
-          min="0"
-          inputMode="numeric"
-          pattern="[0-9]*"
-        />
-      </label>
-      <button type="submit" className={css.btn}>
-        Search
-      </button>
-    </form>
+    <div className="container">
+      <form className={`center ${css.form}`} action={handleSubmit}>
+        <label htmlFor="brand-select" className={css.group}>
+          Car brand
+          <Select
+            styles={selectStyles}
+            placeholder="Choose a brand"
+            options={optionsBrand}
+            name="brand-select"
+            id={`${id}-brand-select`}
+            // className={css.search}
+            classNamePrefix="react-select"
+          />
+        </label>
+        <label htmlFor="price-select" className={css.group}>
+          Price/ 1 hour
+          <Select
+            styles={selectStyles}
+            options={optionsPrice}
+            name="price-select"
+            id={`${id}-price-select`}
+            // className={css.search}
+            placeholder="Choose a price"
+            classNamePrefix="react-select"
+          />
+        </label>
+        <label htmlFor="mileage" className={css.group}>
+          Сar mileage / km
+          <input
+            name="mileage-from"
+            id={`${id}-mileage-from`}
+            className={css.mill}
+            type="number"
+            placeholder="From"
+            min="0"
+            inputMode="numeric"
+            pattern="[0-9]*"
+          />
+          <input
+            name="mileage-to"
+            id={`${id}-mileage-to`}
+            className={css.mill}
+            type="number"
+            placeholder="To"
+            min="0"
+            inputMode="numeric"
+            pattern="[0-9]*"
+          />
+        </label>
+        <button type="submit" className={css.btn}>
+          Search
+        </button>
+      </form>
+    </div>
   );
 }

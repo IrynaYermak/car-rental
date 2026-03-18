@@ -3,6 +3,7 @@
   flex-direction: column;
   width: 100%;
   max-width: 276px;
+  position: relative;
   justify-content: center;
   align-items: stretch;
 }
@@ -18,6 +19,24 @@
     rgba(18, 20, 23, 0.5) 0%,
     rgba(18, 20, 23, 0.5) 100%
   );
+}
+
+.hart {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 1;
+}
+.like {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 16px;
+  height: 16px;
+  border: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .info {
@@ -60,10 +79,6 @@
 }
 
 .text {
-  /* display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden; */
   padding-right: 6px;
   border-right: 1px solid var(--gray-light);
 }

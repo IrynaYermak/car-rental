@@ -1,0 +1,25 @@
+.form {
+  max-width: 924px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 16px;
+  padding-top: 84px;
+  margin-bottom: 56px;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 12px;
+  line-height: 1.33;
+  color: var(--gray);
+}
+
+.btn {
+  padding: 12px 51px;
+  background-color: var(--button);
+  color: var(--white);
+}

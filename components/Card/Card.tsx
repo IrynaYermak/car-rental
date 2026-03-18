@@ -2,6 +2,7 @@ import { Car } from "@/types/Car";
 import Image from "next/image";
 import css from "./Card.module.css";
 import Link from "next/link";
+import { useCarStore } from "@/lib/store/store";
 
 interface CardProps {
   //   key: string;
@@ -9,6 +10,10 @@ interface CardProps {
 }
 
 export default function Card({ car }: CardProps) {
+  const favoriteCars = useCarStore((state) => state.favoriteCars);
+  const setFavoriteCars = useCarStore((state) => state.setFavoriteCars);
+  const isFavoriteCar = favoriteCars.includes(car.id);
+
   const {
     id,
     img,
@@ -34,6 +39,21 @@ export default function Card({ car }: CardProps) {
         alt={brand}
         loading="eager"
       />
+      <button
+        className={css.like}
+        type="button"
+        onClick={() => setFavoriteCars(car.id)}
+      >
+        <svg className={css.hart} width="16" height="16" viewBox="0 0 24 24">
+          <use
+            href={
+              isFavoriteCar
+                ? "/icons.svg#icon-full-hart"
+                : "/icons.svg#icon-hart"
+            }
+          />
+        </svg>
+      </button>
 
       <div className={css.info}>
         <div className={css.carInfo}>
