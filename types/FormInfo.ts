@@ -1,4 +1,4 @@
-export interface FormInfo {
+export interface FilterFormInfo {
   brand: string;
   rentalPrice: string;
   minMileage: string;

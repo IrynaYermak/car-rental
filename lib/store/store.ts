@@ -1,15 +1,31 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { FilterFormInfo } from "@/types/FormInfo";
 
 interface CarStore {
+  filter: FilterFormInfo;
+
   favoriteCars: string[];
+  setFilter: (filterData: FilterFormInfo) => void;
+  clearFilter: () => void;
   setFavoriteCars: (id: string) => void;
   isFavoriteCar: (id: string) => boolean;
 }
 
+const initialFilter: FilterFormInfo = {
+  brand: "",
+  rentalPrice: "",
+  minMileage: "",
+  maxMileage: "",
+};
+
 export const useCarStore = create<CarStore>()(
   persist(
     (set, get) => ({
+      filter: initialFilter,
+      setFilter: (filterData) => set(() => ({ filter: filterData })),
+      clearFilter: () => set(() => ({ filter: initialFilter })),
+
       favoriteCars: [],
       setFavoriteCars: (id) =>
         set((state) => ({
@@ -21,7 +37,10 @@ export const useCarStore = create<CarStore>()(
     }),
     {
       name: "carStore",
-      partialize: (state) => ({ favoriteCars: state.favoriteCars }),
+      partialize: (state) => ({
+        favoriteCars: state.favoriteCars,
+        filter: state.filter,
+      }),
     }
   )
 );

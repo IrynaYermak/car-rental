@@ -3,29 +3,32 @@
 import css from "./SearchBar.module.css";
 import { useState, useEffect, useId } from "react";
 import { getBrands } from "@/lib/api/api";
-import { FormInfo } from "@/types/FormInfo";
+import { FilterFormInfo } from "@/types/FormInfo";
 // import Select from "react-select";
 import { selectStyles } from "./reactSelectStyles";
 import dynamic from "next/dynamic";
+// import { useCarStore } from "@/lib/store/satore";
 const Select = dynamic(() => import("react-select"), { ssr: false });
 
 interface SearchBarProps {
-  onSubmit: (data: FormInfo) => void;
+  filter: FilterFormInfo;
+  onSubmit: (data: FilterFormInfo) => void;
 }
 
-export default function SearchBar({ onSubmit }: SearchBarProps) {
+type SelectOption = {
+  value: string;
+  label: string;
+};
+
+export default function SearchBar({ filter, onSubmit }: SearchBarProps) {
   const id = useId();
   const [brands, setBrands] = useState<string[]>([]);
   const price = ["30", "40", "50", "60", "70", "80"];
+  const [formData, setFormData] = useState(filter);
 
-  const handleSubmit = (formData: FormData) => {
-    const brand = formData.get("brand-select")?.toString() || "";
-    const rentalPrice = formData.get("price-select")?.toString() || "";
-    const minMileage = formData.get("mileage-from")?.toString() || "";
-    const maxMileage = formData.get("mileage-to")?.toString() || "";
-
-    onSubmit({ brand, rentalPrice, minMileage, maxMileage });
-  };
+  useEffect(() => {
+    setFormData(filter);
+  }, [filter]);
 
   useEffect(() => {
     const fetchBrands = async () => {
@@ -39,14 +42,29 @@ export default function SearchBar({ onSubmit }: SearchBarProps) {
 
     fetchBrands();
   }, []);
-  const optionsBrand = brands.map((brand) => ({ value: brand, label: brand }));
-  const optionsPrice = price.map((el) => ({ value: el, label: el }));
 
-  // console.log("brands", brands);
+  const updateField = (key: keyof FilterFormInfo, value: string) => {
+    setFormData((prev) => ({ ...prev, [key]: value }));
+  };
+
+  const optionsBrand: SelectOption[] = brands.map((brand) => ({
+    value: brand,
+    label: brand,
+  }));
+  const optionsPrice: SelectOption[] = price.map((el) => ({
+    value: el,
+    label: el,
+  }));
 
   return (
     <div className="container">
-      <form className={`center ${css.form}`} action={handleSubmit}>
+      <form
+        className={`center ${css.form}`}
+        onSubmit={(e) => {
+          e.preventDefault();
+          onSubmit(formData);
+        }}
+      >
         <label htmlFor="brand-select" className={css.group}>
           Car brand
           <Select
@@ -55,8 +73,16 @@ export default function SearchBar({ onSubmit }: SearchBarProps) {
             options={optionsBrand}
             name="brand-select"
             id={`${id}-brand-select`}
-            // className={css.search}
             classNamePrefix="react-select"
+            value={
+              formData.brand
+                ? { value: formData.brand, label: formData.brand }
+                : null
+            }
+            onChange={(option) =>
+              updateField("brand", (option as SelectOption | null)?.value ?? "")
+            }
+            isClearable
           />
         </label>
         <label htmlFor="price-select" className={css.group}>
@@ -66,9 +92,20 @@ export default function SearchBar({ onSubmit }: SearchBarProps) {
             options={optionsPrice}
             name="price-select"
             id={`${id}-price-select`}
-            // className={css.search}
             placeholder="Choose a price"
             classNamePrefix="react-select"
+            value={
+              formData.rentalPrice
+                ? { value: formData.rentalPrice, label: formData.rentalPrice }
+                : null
+            }
+            onChange={(option) =>
+              updateField(
+                "rentalPrice",
+                (option as SelectOption | null)?.value || ""
+              )
+            }
+            isClearable
           />
         </label>
         <label htmlFor="mileage" className={css.group}>
@@ -83,6 +120,8 @@ export default function SearchBar({ onSubmit }: SearchBarProps) {
               min="0"
               inputMode="numeric"
               pattern="[0-9]*"
+              value={formData.minMileage}
+              onChange={(e) => updateField("minMileage", e.target.value)}
             />
             <input
               name="mileage-to"
@@ -93,6 +132,8 @@ export default function SearchBar({ onSubmit }: SearchBarProps) {
               min="0"
               inputMode="numeric"
               pattern="[0-9]*"
+              value={formData.maxMileage}
+              onChange={(e) => updateField("maxMileage", e.target.value)}
             />
           </div>
         </label>

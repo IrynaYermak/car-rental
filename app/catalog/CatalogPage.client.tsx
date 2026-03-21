@@ -6,14 +6,17 @@ import SearchBar from "@/components/SearchBar/SearchBar";
 import Loader from "@/components/Loader/Loader";
 import CarsList from "@/components/CarsList/CarsList";
 import css from "./CatalogPage.module.css";
-import { FormInfo } from "@/types/FormInfo";
-import { useState } from "react";
+import { FilterFormInfo } from "@/types/FormInfo";
+// // import { useState } from "react";
+import { useCarStore } from "@/lib/store/store";
 
 export default function CatalogClienPage() {
-  const [filterData, setFilterData] = useState<FormInfo | null>(null);
+  // const [filterData, setFilterData] = useState<FilterFormInfo | null>(null);
 
-  const handleFilter = (data: FormInfo) => {
-    setFilterData(data);
+  const filter = useCarStore((state) => state.filter);
+
+  const handleFilter = (filter: FilterFormInfo) => {
+    useCarStore.getState().setFilter(filter);
   };
 
   const {
@@ -25,11 +28,11 @@ export default function CatalogClienPage() {
     isFetching,
     isFetchingNextPage,
   } = useInfiniteQuery({
-    queryKey: ["cars", filterData],
+    queryKey: ["cars", filter],
     queryFn: async ({ pageParam }) => {
       const data = await getCars({
         page: pageParam.toString(),
-        ...filterData,
+        ...filter,
       });
       return data;
     },
@@ -52,7 +55,7 @@ export default function CatalogClienPage() {
 
   return (
     <>
-      <SearchBar onSubmit={handleFilter} />
+      <SearchBar filter={filter} onSubmit={handleFilter} />
       {isLoading && <Loader />}
       {error && <p className="center">Something went wrong</p>}
       {!isLoading && !error && !isCarsExist && <p>No cars on your request</p>}
