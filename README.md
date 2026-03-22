@@ -74,10 +74,8 @@
     <p>1. Clone the repository:</p>
     <code style="color: #fff;">git clone https://github.com/IrynaYermak/car-rental</code><br>
     <code style="color: #fff;">cd car-rental</code>
-    
     <p>2. Install dependencies:</p>
     <code style="color: #fff;">npm install</code>
-    
     <p>3. Run development server:</p>
     <code style="color: #fff;">npm run dev</code>
   </div>
